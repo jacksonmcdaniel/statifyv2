@@ -1,17 +1,19 @@
+import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
   return (
-    <nav className="flex justify-between bg-white">
+    <nav className="flex justify-between bg-background text-text">
       <ul className="flex list-none">
         <li className="p-5">
-          <a href="/">Home</a>
+          <NavLink to="/">Home</NavLink>
         </li>
       </ul>
       <ul className="flex list-none">
         <li className="p-5">
-          <a href="/">About</a>
+          <NavLink to="/">About</NavLink>
         </li>
         <li className="p-5">
-          <a href="/">Login</a>
+          <NavLink to="/">Login</NavLink>
         </li>
       </ul>
     </nav>
