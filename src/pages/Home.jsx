@@ -1,12 +1,12 @@
-import { useState } from "react";
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
+import { useContext, useState } from "react";
+import SpotifyAuthContext from "../hooks/SpotifyAuthContext";
 import axios from "axios";
 
 export default function Home() {
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
 
-  const { token, loginUrl, logout } = useSpotifyAuth();
+  const { token, loginUrl, logout } = useContext(SpotifyAuthContext);
 
   const searchArtists = async (e) => {
     e.preventDefault();
