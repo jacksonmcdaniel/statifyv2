@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import SpotifyAuthContext from "../hooks/SpotifyAuthContext";
 import axios from "axios";
+import ArtistTable from "../components/ArtistTable";
 
 export default function Home() {
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
 
-  const { token, loginUrl, logout } = useContext(SpotifyAuthContext);
+  const { token } = useContext(SpotifyAuthContext);
 
   const searchArtists = async (e) => {
     e.preventDefault();
@@ -23,34 +24,19 @@ export default function Home() {
     setArtists(data.artists.items);
   };
 
-  const renderArtists = () => {
-    return artists.map((artist) => (
-      <div key={artist.id}>
-        {artist.images.length ? (
-          <img width={"100%"} src={artist.images[0].url} alt="" />
-        ) : (
-          <div>No Image</div>
-        )}
-        {artist.name}
-      </div>
-    ));
-  };
-
   return (
-    <div>
-      <h1>Home</h1>
-      {!token ? (
-        <a href={loginUrl}>Login to Spotify</a>
-      ) : (
-        <button onClick={logout}>Logout</button>
-      )}
-
+    <div className="w-full h-auto bg-background text-text grid justify-center content-start grid-cols-1 gap-5">
+      <h1>This is the Homepage</h1>
       <form onSubmit={searchArtists}>
-        <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
+        <input
+          className="text-black"
+          type="text"
+          onChange={(e) => setSearchKey(e.target.value)}
+        />
         <button type={"submit"}>Search</button>
       </form>
 
-      {renderArtists()}
+      <ArtistTable artists={artists} />
     </div>
   );
 }
